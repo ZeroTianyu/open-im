@@ -12,7 +12,7 @@
     <groupId>com.openim</groupId>
     <artifactId>msg</artifactId>
     <name>msg</name>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <description>消息</description>
     <properties>
