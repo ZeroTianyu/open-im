@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: msg-server
+  main.allow-bean-definition-overriding: true
+  cloud:
+    nacos.config:
+      server-addr: localhost:8848
+      namespace: public
+      group: dev
+      file-extension: yml
+    stream:
+      bindings:
+        # 此处一定要跟方法名匹配上
+        apiServiceLog-in-0:
+          destination: apiServiceLog
+        apiServiceLog-out-0:
+          destination: apiServiceLog
+      kafka:
+        binder:
+          brokers: localhost:9092
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:8080
+socketio:
+  host: 127.0.0.1
+  port: 9001
+  maxFramePayloadLength: 1048576
+  maxHttpContentLenght: 1048576
+  #设置socket连接数的大小 只监听一个端口boss线程组为1即可
+  bossCount: 1
+  workCount: 100
+  allowCustomRequests: true
+  upgradeTimeout: 1000000
+  pingTimeout: 60000000
+  pingInterval: 25000
+
+
+server:
+  port: 8081
+
