@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>user-server</module>
-        <module>user-api</module>
         <module>user-common</module>
         <module>user-base</module>
     </modules>

@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   application:
     name: msg-server
@@ -35,8 +37,4 @@ socketio:
   upgradeTimeout: 1000000
   pingTimeout: 60000000
   pingInterval: 25000
-
-
-server:
-  port: 8081
 
