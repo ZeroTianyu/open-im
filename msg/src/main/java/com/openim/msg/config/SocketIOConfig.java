@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SocketIOConfig {
-    @Value("${socketio.host}")
-    private String host;
 
     @Value("${socketio.port}")
     private Integer port;
@@ -40,8 +38,9 @@ public class SocketIOConfig {
     @Bean
     public SocketIOServer socketIOServer() {
         com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
+        // 不可指定hostname，指定之后无法通过网关负载均衡
 //        config.setHostname("localhost");
-        config.setPort(9092);
+        config.setPort(port);
 
         final SocketIOServer server = new SocketIOServer(config);
 

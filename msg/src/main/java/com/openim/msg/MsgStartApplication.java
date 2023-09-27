@@ -21,9 +21,11 @@ public class MsgStartApplication {
     @Resource
     private SocketIOServer server;
 
-
     @Value("${socketio.port}")
     private Integer port;
+
+    @Value("${socketio.serviceName}")
+    private String serviceName;
     @Resource
     private NacosDiscoveryProperties nacosDiscoveryProperties;
 
@@ -32,9 +34,9 @@ public class MsgStartApplication {
     }
 
     @PostConstruct
-    private void init() throws NacosException {
+    private void init() {
         server.start();
-        registerNamingService("chat-server", 9092);
+        registerNamingService(serviceName, port);
     }
 
     /**

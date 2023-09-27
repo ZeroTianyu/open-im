@@ -26,7 +26,7 @@ spring:
         jwt:
           issuer-uri: http://127.0.0.1:8080
 socketio:
-  host: 127.0.0.1
+  serviceName: chat-server
   port: 9001
   maxFramePayloadLength: 1048576
   maxHttpContentLenght: 1048576
