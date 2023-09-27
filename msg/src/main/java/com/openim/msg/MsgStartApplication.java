@@ -34,7 +34,7 @@ public class MsgStartApplication {
     @PostConstruct
     private void init() throws NacosException {
         server.start();
-        registerNamingService("chat-server", port);
+        registerNamingService("chat-server", 9092);
     }
 
     /**

@@ -1,16 +1,15 @@
 package com.openim.msg.config;
 
+import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketConfig;
+import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
+import com.corundumstudio.socketio.listener.DataListener;
+import com.openim.msg.model.ChatObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-/**
- * @author: hett
- * @date: 2021/12/13 10:02
- */
 
 @Configuration
 public class SocketIOConfig {
@@ -40,27 +39,19 @@ public class SocketIOConfig {
 
     @Bean
     public SocketIOServer socketIOServer() {
-        SocketConfig socketConfig = new SocketConfig();
-//        socketConfig.setTcpNoDelay(true);
-//        socketConfig.setSoLinger(0);
-        socketConfig.setTcpKeepAlive(true);
         com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
-        config.setSocketConfig(socketConfig);
-        config.setHostname(host);
-        config.setPort(port);
-        config.setBossThreads(bossCount);
-        config.setWorkerThreads(workCount);
-        config.setAllowCustomRequests(allowCustomRequests);
-        config.setUpgradeTimeout(upgradeTimeout);
-        config.setPingTimeout(pingTimeout);
-        config.setPingInterval(pingInterval);
-//        config.setTransports(Transport.POLLING, Transport.WEBSOCKET);
-        config.setOrigin("*");
-        return new SocketIOServer(config);
-    }
+//        config.setHostname("localhost");
+        config.setPort(9092);
 
-    @Bean
-    public SpringAnnotationScanner springAnnotationScanner(SocketIOServer socketServer) {
-        return new SpringAnnotationScanner(socketServer);
+        final SocketIOServer server = new SocketIOServer(config);
+
+        server.addEventListener("chatevent", ChatObject.class, new DataListener<ChatObject>() {
+            @Override
+            public void onData(SocketIOClient client, ChatObject data, AckRequest ackRequest) {
+                // broadcast messages to all clients
+                server.getBroadcastOperations().sendEvent("chatevent", data);
+            }
+        });
+        return server;
     }
 }
