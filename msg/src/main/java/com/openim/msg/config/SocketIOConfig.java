@@ -1,17 +1,16 @@
 package com.openim.msg.config;
 
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketConfig;
-import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
-import com.corundumstudio.socketio.listener.DataListener;
 import com.openim.msg.model.ChatObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@Slf4j
 public class SocketIOConfig {
 
     @Value("${socketio.port}")
@@ -41,16 +40,27 @@ public class SocketIOConfig {
         // 不可指定hostname，指定之后无法通过网关负载均衡
 //        config.setHostname("localhost");
         config.setPort(port);
+        config.setTransports(Transport.WEBSOCKET);
+        config.setAuthorizationListener(data -> {
+            String token = data.getSingleUrlParam("token");
+//            log.info(token);
+            return true;
+        });
 
         final SocketIOServer server = new SocketIOServer(config);
 
-        server.addEventListener("chatevent", ChatObject.class, new DataListener<ChatObject>() {
-            @Override
-            public void onData(SocketIOClient client, ChatObject data, AckRequest ackRequest) {
-                // broadcast messages to all clients
-                server.getBroadcastOperations().sendEvent("chatevent", data);
-            }
+        server.addEventListener("chatevent", ChatObject.class, (client, data, ackRequest) -> {
+            // broadcast messages to all clients
+            server.getBroadcastOperations().sendEvent("chatevent", data);
         });
         return server;
+    }
+
+    /**
+     * 用于扫描netty-socketio的注解，比如 @OnConnect、@OnEvent
+     */
+    @Bean
+    public SpringAnnotationScanner springAnnotationScanner() {
+        return new SpringAnnotationScanner(socketIOServer());
     }
 }
