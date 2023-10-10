@@ -1,12 +1,17 @@
 package com.openim.auth.config;
 
+import cn.hutool.core.codec.Base64;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import lombok.SneakyThrows;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.annotation.Secured;
@@ -29,11 +34,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
+import java.security.KeyFactory;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.util.UUID;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 /**
  * 认证配置
@@ -50,6 +55,10 @@ import java.util.UUID;
 @EnableWebSecurity
 @EnableMethodSecurity(jsr250Enabled = true, securedEnabled = true)
 public class AuthorizationConfig {
+
+    @jakarta.annotation.Resource
+    private OAuth2ResourceServerProperties oAuth2ResourceServerProperties;
+
 
     private static final String CUSTOM_CONSENT_PAGE_URI = "/oauth2/consent";
 
@@ -151,33 +160,28 @@ public class AuthorizationConfig {
      * @return JWKSource
      */
     @Bean
+    @SneakyThrows
     public JWKSource<SecurityContext> jwkSource() {
-        KeyPair keyPair = generateRsaKey();
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+
+
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        // 公钥
+        Resource rsaPublicKey = new ClassPathResource("public_key.key");
+        X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(Base64.decode(new String(rsaPublicKey.getContentAsByteArray())));
+        RSAPublicKey publicKey = (RSAPublicKey) keyFactory.generatePublic(publicKeySpec);
+
+        //私钥
+        Resource rsaPrivateKey = new ClassPathResource("private_key.key");
+        PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(Base64.decode(new String(rsaPrivateKey.getContentAsByteArray())));
+        RSAPrivateKey privateKey = (RSAPrivateKey) keyFactory.generatePrivate(privateKeySpec);
+
         RSAKey rsaKey = new RSAKey.Builder(publicKey)
                 .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
                 .build();
+        // 生成jws
         JWKSet jwkSet = new JWKSet(rsaKey);
         return new ImmutableJWKSet<>(jwkSet);
-    }
 
-    /**
-     * 生成rsa密钥对，提供给jwk
-     *
-     * @return 密钥对
-     */
-    private static KeyPair generateRsaKey() {
-        KeyPair keyPair;
-        try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            keyPair = keyPairGenerator.generateKeyPair();
-        } catch (Exception ex) {
-            throw new IllegalStateException(ex);
-        }
-        return keyPair;
     }
 
     /**
