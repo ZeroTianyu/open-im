@@ -28,7 +28,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>2022.0.3</spring-cloud.version>
         <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
-        <spring-cloud-bootstrap.version>3.1.6</spring-cloud-bootstrap.version>
         <fastjson.version>2.0.32</fastjson.version>
         <hutool.version>5.8.16</hutool.version>
         <mysql.version>8.0.32</mysql.version>

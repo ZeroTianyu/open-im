@@ -4,17 +4,20 @@ spring:
   application:
     name: auth-server
   datasource:
-    url: jdbc:mysql://localhost:3306/open-im-auth
+    url: jdbc:mysql://10.0.0.21:31557/open-im-auth
     username: root
-    password: root
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   main.allow-bean-definition-overriding: true
   cloud:
-    nacos.config:
-      server-addr: localhost:8848
-      namespace: public
-      group: dev
-      file-extension: yml
+    nacos:
+      discovery:
+        server-addr: 10.0.0.21:31529
+      config:
+        server-addr: 10.0.0.21:31529
+        namespace: public
+        group: dev
+        file-extension: yml
   security:
     oauth2:
       resourceserver:
@@ -22,8 +25,9 @@ spring:
           public-key-location: public_key.key
   data:
     redis:
-      host: localhost
-      port: 6379
+      host: 10.0.0.21
+      port: 32161
+      password: 123456
       database: 0
       lettuce:
         pool:

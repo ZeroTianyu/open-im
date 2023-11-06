@@ -2,15 +2,15 @@ server:
   port: 8090
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/open-im-user
+    url: jdbc:mysql://10.0.0.21:31557/open-im-user
     username: root
-    password: root
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   data:
     redis:
-      host: localhost
-      port: 6379
-      database: 0
+      host: 10.0.0.21
+      port: 32161
+      password: 123456
       lettuce:
         pool:
           max-active: 8
@@ -22,8 +22,11 @@ spring:
     name: user-server
   main.allow-bean-definition-overriding: true
   cloud:
-    nacos.config:
-      server-addr: localhost:8848
-      namespace: public
-      group: dev
-      file-extension: yml
+    nacos:
+      discovery:
+        server-addr: 10.0.0.21:31529
+      config:
+        server-addr: 10.0.0.21:31529
+        namespace: public
+        group: dev
+        file-extension: yml

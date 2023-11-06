@@ -5,21 +5,30 @@ spring:
     name: msg-server
   main.allow-bean-definition-overriding: true
   cloud:
-    nacos.config:
-      server-addr: localhost:8848
-      namespace: public
-      group: dev
-      file-extension: yml
+    nacos:
+      discovery:
+        server-addr: 10.0.0.21:31529
+      config:
+        server-addr: 10.0.0.21:31529
+        namespace: public
+        group: dev
+        file-extension: yml
     stream:
       bindings:
-        # 此处一定要跟方法名匹配上
-        apiServiceLog-in-0:
-          destination: apiServiceLog
-        apiServiceLog-out-0:
-          destination: apiServiceLog
-      kafka:
-        binder:
-          brokers: localhost:9092
+        master-in-0:
+          destination: batch-in
+          group: batch-in
+          consumer:
+            batch-mode: true
+        output-out-0:
+          destination: batch-out
+  kafka:
+    producer:
+      acks: all
+    consumer:
+      auto-offset-reset: earliest
+
+
   security:
     oauth2:
       resourceserver:

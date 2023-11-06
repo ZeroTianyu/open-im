@@ -5,11 +5,14 @@ spring:
     name: gateway
   main.allow-bean-definition-overriding: true
   cloud:
-    nacos.config:
-      server-addr: localhost:8848
-      namespace: public
-      group: dev
-      file-extension: yml
+    nacos:
+      discovery:
+        server-addr: 10.0.0.21:31529
+      config:
+        server-addr: 10.0.0.21:31529
+        namespace: public
+        group: dev
+        file-extension: yml
     gateway:
       routes:
         - id: user-server
