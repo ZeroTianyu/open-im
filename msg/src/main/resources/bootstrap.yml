@@ -1,33 +1,28 @@
 server:
   port: 8081
 spring:
+  kafka:
+    bootstrap-servers: 10.0.0.21:9092
   application:
     name: msg-server
   main.allow-bean-definition-overriding: true
   cloud:
     nacos:
       discovery:
-        server-addr: 10.0.0.21:31529
+        server-addr: localhost:8848
       config:
-        server-addr: 10.0.0.21:31529
+        server-addr: localhost:8848
         namespace: public
         group: dev
         file-extension: yml
     stream:
       bindings:
-        master-in-0:
-          destination: batch-in
-          group: batch-in
+        message-in-0:
+          destination: message-in
           consumer:
             batch-mode: true
-        output-out-0:
-          destination: batch-out
-  kafka:
-    producer:
-      acks: all
-    consumer:
-      auto-offset-reset: earliest
-
+        message-out-0:
+          destination: message
 
   security:
     oauth2:

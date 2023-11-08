@@ -3,7 +3,6 @@ package com.openim.msg.config;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
-import com.openim.msg.model.ChatObject;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +10,7 @@ import org.jose4j.jwt.consumer.JwtConsumer;
 import org.jose4j.jwt.consumer.JwtConsumerBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,6 +26,10 @@ public class SocketIOConfig {
 
     @Resource
     private OAuth2ResourceServerProperties oAuth2ResourceServerProperties;
+    @Resource
+    private StreamBridge streamBridge;
+    @Value("${spring.cloud.stream.bindings.message-in-0.destination}")
+    private String bindingName;
 
     @Value("${socketio.port}")
     private Integer port;
@@ -81,11 +85,12 @@ public class SocketIOConfig {
         });
 
         final SocketIOServer server = new SocketIOServer(config);
-
-        server.addEventListener("chatevent", ChatObject.class, (client, data, ackRequest) -> {
-            // broadcast messages to all clients
-            server.getBroadcastOperations().sendEvent("chatevent", data);
-        });
+//
+//        server.addEventListener("chatevent", Object.class, (client, data, ackRequest) -> {
+//            // broadcast messages to all clients
+//            streamBridge.send(bindingName, data);
+//
+//        });
         return server;
     }
 
