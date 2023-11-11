@@ -1,4 +1,4 @@
-package com.openim.user.config;
+package com.openim.common.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;

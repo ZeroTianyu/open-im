@@ -1,4 +1,4 @@
-package com.openim.user.config;
+package com.openim.common.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;

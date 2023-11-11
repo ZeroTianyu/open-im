@@ -12,12 +12,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.net.InetAddress;
 
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableCaching
+@ComponentScan({"com.openim.msg","com.openim.common"})
 public class MsgStartApplication {
     @Resource
     private SocketIOServer server;

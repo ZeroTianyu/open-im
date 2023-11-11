@@ -1,4 +1,4 @@
-package com.openim.user.config;
+package com.openim.common.config;
 
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.SerializationConfig;

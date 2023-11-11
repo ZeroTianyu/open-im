@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2Res
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.StringUtils;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -75,23 +76,16 @@ public class SocketIOConfig {
         config.setPort(port);
         config.setTransports(Transport.WEBSOCKET);
         config.setAuthorizationListener(data -> {
-//            log.info("AuthorizationListener: {}", data);
-//            String token = data.getSingleUrlParam("token");
-//            if (!StringUtils.hasText(token)){
-//                return false;
-//            }
-//            verifyToken(token);
+            log.info("AuthorizationListener: {}", data);
+            String token = data.getSingleUrlParam("token");
+            if (!StringUtils.hasText(token)) {
+                return false;
+            }
+            verifyToken(token);
             return true;
         });
 
-        final SocketIOServer server = new SocketIOServer(config);
-//
-//        server.addEventListener("chatevent", Object.class, (client, data, ackRequest) -> {
-//            // broadcast messages to all clients
-//            streamBridge.send(bindingName, data);
-//
-//        });
-        return server;
+        return new SocketIOServer(config);
     }
 
 

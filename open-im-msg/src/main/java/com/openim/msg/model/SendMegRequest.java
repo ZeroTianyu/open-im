@@ -58,7 +58,7 @@ public class SendMegRequest implements Serializable {
     /**
      * 不进行离线推送
      */
-    private Boolean notOfflinePush;
+//    private Boolean notOfflinePush;
     /**
      * 消息发送时间，仅导入消息时填写，单位毫秒
      */
@@ -66,6 +66,6 @@ public class SendMegRequest implements Serializable {
     /**
      * 离线推送的具体内容，如果不填写，使用服务器默认推送标题
      */
-    private MsgOfflinePushInfo offlinePushInfo;
+//    private MsgOfflinePushInfo offlinePushInfo;
 
 }
