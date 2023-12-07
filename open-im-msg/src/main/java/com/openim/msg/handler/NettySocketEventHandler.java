@@ -32,7 +32,7 @@ public class NettySocketEventHandler {
 
     //socket事件消息接收入口
     @OnEvent(value = SocketIOEventConstant.CHAT) //value值与前端自行商定
-    public void onEvent(SocketIOClient client, AckRequest ackRequest, String msg) {
+    public void onEvent(SocketIOClient client, AckRequest ackRequest, Object msg) {
         streamBridge.send(bindingName, msg);
     }
 

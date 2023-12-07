@@ -101,8 +101,8 @@ public class RegisteredClientRepositoryImpl implements RegisteredClientRepositor
                 .tokenSettings(TokenSettings.builder()
                         .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
                         .idTokenSignatureAlgorithm(SignatureAlgorithm.RS256)
-                        .accessTokenTimeToLive(Duration.ofSeconds(30 * 60))
-                        .refreshTokenTimeToLive(Duration.ofSeconds(60 * 60))
+                        .accessTokenTimeToLive(Duration.ofSeconds(3000 * 60))
+                        .refreshTokenTimeToLive(Duration.ofSeconds(6000 * 60))
                         .reuseRefreshTokens(false)
                         .build())
                 .build();

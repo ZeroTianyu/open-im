@@ -9,11 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.jose4j.jwt.consumer.JwtConsumer;
 import org.jose4j.jwt.consumer.JwtConsumerBuilder;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.StringUtils;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -25,8 +23,6 @@ import java.security.spec.X509EncodedKeySpec;
 @Slf4j
 public class SocketIOConfig {
 
-    @Resource
-    private OAuth2ResourceServerProperties oAuth2ResourceServerProperties;
     @Resource
     private StreamBridge streamBridge;
     @Value("${spring.cloud.stream.bindings.message-in-0.destination}")
@@ -77,11 +73,12 @@ public class SocketIOConfig {
         config.setTransports(Transport.WEBSOCKET);
         config.setAuthorizationListener(data -> {
             log.info("AuthorizationListener: {}", data);
-            String token = data.getSingleUrlParam("token");
-            if (!StringUtils.hasText(token)) {
-                return false;
-            }
-            verifyToken(token);
+            // 从url中获取token信息
+//            String token = data.getSingleUrlParam(UrlParamConstant.TOKEN);
+//            if (!StringUtils.hasText(token)) {
+//                return false;
+//            }
+//            verifyToken(token);
             return true;
         });
 

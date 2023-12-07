@@ -35,3 +35,12 @@ spring:
           max-wait: -1
           max-idle: 8
           min-idle: 1
+# MinIO 配置
+minio:
+  endpoint: http://127.0.0.1:9000      # MinIO服务地址
+  fileHost: http://127.0.0.1:9000      # 文件地址host
+  bucketName: avatar                     # 存储桶bucket名称
+  accessKey: TSYldHogpi9o2YTB7dMy                         # 用户名
+  secretKey: kc9JXwQ6U3A9uB6NfyKrTjoSlsvQRkquaJWn4R7P                     # 密码
+  imgSize: 1024                           # 图片大小限制，单位：m
+  fileSize: 1024                          # 文件大小限制，单位：m

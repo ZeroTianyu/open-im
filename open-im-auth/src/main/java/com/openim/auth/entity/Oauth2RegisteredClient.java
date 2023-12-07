@@ -3,6 +3,7 @@ package com.openim.auth.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.openim.common.entity.BaseEntity;
 import lombok.Data;
 
 import java.time.LocalDateTime;

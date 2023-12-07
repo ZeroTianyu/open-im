@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.openim.auth.model.security.CustomGrantedAuthority;
+import com.openim.common.entity.BaseEntity;
 import lombok.Data;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -27,7 +28,7 @@ public class Oauth2BasicUser extends BaseEntity implements UserDetails {
     /**
      * 用户名、昵称
      */
-    private String name;
+    private String nikeName;
 
     /**
      * 账号

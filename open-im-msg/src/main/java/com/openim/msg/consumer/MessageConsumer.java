@@ -2,6 +2,7 @@ package com.openim.msg.consumer;
 
 import com.alibaba.fastjson2.JSON;
 import com.corundumstudio.socketio.SocketIOClient;
+import com.openim.msg.constant.SocketIOEventConstant;
 import com.openim.msg.model.SendMegRequest;
 import com.openim.msg.service.SessionFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class MessageConsumer {
             SendMegRequest sendMegRequest = JSON.parseObject(request, SendMegRequest.class);
             SocketIOClient socketIOClient = SessionFactory.getSession().getSocketIOClient(sendMegRequest.getRecvID());
             if (socketIOClient != null) {
-                socketIOClient.sendEvent("chatevent", sendMegRequest);
+                socketIOClient.sendEvent(SocketIOEventConstant.CHAT, sendMegRequest);
             }
 
             log.info("收到消息:{}", request);

@@ -30,3 +30,9 @@ spring:
         namespace: public
         group: dev
         file-extension: yml
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080
+          public-key-location: public_key.key

@@ -9,10 +9,6 @@ import java.io.Serializable;
 @Data
 public class SendMegRequest implements Serializable {
     /**
-     * 发送者ID(APP管理员ID或用户ID)
-     */
-    private String sendID;
-    /**
      * 接收者ID，sessionType1或者4时必填，如果是群聊则不填
      */
     private String recvID;

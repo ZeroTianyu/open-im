@@ -39,4 +39,19 @@ public class JwtPayload {
      * 签发时间
      */
     private Long iat;
+    /**
+     * 用户id
+     */
+    private Long userId;
+
+    /**
+     * 用户昵称
+     */
+    private String nikeName;
+
+
+    /**
+     * 权限列表
+     */
+    public List<String> authorities;
 }
