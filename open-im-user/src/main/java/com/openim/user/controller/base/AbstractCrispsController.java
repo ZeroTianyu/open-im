@@ -1,12 +1,12 @@
 package com.openim.user.controller.base;
 
 
-import com.openim.user.enums.ResultCode;
-import com.openim.user.enums.ResultMessage;
-import com.openim.user.exception.AbstractOpenIMException;
-import com.openim.user.model.OpenIMPageable;
-import com.openim.user.model.OpenIMResponse;
-import com.openim.user.utils.ResultTool;
+import com.openim.common.enums.ResultCode;
+import com.openim.common.enums.ResultMessage;
+import com.openim.common.exception.AbstractOpenIMException;
+import com.openim.common.model.OpenIMPageable;
+import com.openim.common.model.OpenIMResponse;
+import com.openim.common.utils.ResultTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -39,6 +39,11 @@ public class JwtPayload {
      * 签发时间
      */
     private Long iat;
+
+
+    /* ----------以上是框架自带，以下是自定义    ------------*/
+
+
     /**
      * 用户id
      */

@@ -10,7 +10,6 @@ import com.openim.auth.entity.Oauth2BasicUser;
 import com.openim.common.model.jwt.JwtPayload;
 import com.openim.common.utils.FieldNameUtil;
 import lombok.SneakyThrows;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -67,9 +66,6 @@ import java.util.stream.Collectors;
 @EnableWebSecurity
 @EnableMethodSecurity(jsr250Enabled = true, securedEnabled = true)
 public class AuthorizationConfig {
-
-    @jakarta.annotation.Resource
-    private OAuth2ResourceServerProperties oAuth2ResourceServerProperties;
 
 
     private static final String CUSTOM_CONSENT_PAGE_URI = "/oauth2/consent";

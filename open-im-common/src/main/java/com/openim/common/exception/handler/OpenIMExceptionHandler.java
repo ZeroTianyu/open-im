@@ -1,11 +1,11 @@
-package com.openim.auth.exception.handler;
+package com.openim.common.exception.handler;
 
 
-import com.openim.auth.enums.ResponseCode;
-import com.openim.auth.exception.AbstractOpenIMException;
-import com.openim.auth.exception.OpenIMException;
-import com.openim.auth.model.OpenIMResponse;
-import com.openim.auth.utils.ResultTool;
+import com.openim.common.exception.AbstractOpenIMException;
+import com.openim.common.exception.OpenIMException;
+import com.openim.common.utils.ResultTool;
+import com.openim.common.enums.ResponseCode;
+import com.openim.common.model.OpenIMResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;

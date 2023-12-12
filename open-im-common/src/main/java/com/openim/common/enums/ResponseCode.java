@@ -1,4 +1,4 @@
-package com.openim.user.enums;
+package com.openim.common.enums;
 
 
 /**

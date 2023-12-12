@@ -1,4 +1,4 @@
-package com.openim.auth.exception;
+package com.openim.common.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

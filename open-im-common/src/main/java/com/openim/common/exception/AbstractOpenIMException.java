@@ -1,7 +1,7 @@
-package com.openim.user.exception;
+package com.openim.common.exception;
 
 
-import com.openim.user.enums.ResultCode;
+import com.openim.common.enums.ResultCode;
 import lombok.Getter;
 
 import java.text.MessageFormat;

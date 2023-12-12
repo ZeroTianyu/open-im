@@ -14,6 +14,11 @@ spring:
         group: dev
         file-extension: yml
     gateway:
+      default-filters:
+        # 令牌中继
+        - TokenRelay=
+        # 代理路径，代理至服务后会去除第一个路径的内容
+        - StripPrefix=1
       routes:
         - id: user-server
           uri: lb://user-server

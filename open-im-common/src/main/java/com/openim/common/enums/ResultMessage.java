@@ -1,4 +1,4 @@
-package com.openim.auth.enums;
+package com.openim.common.enums;
 
 public enum ResultMessage implements ResultCode {
     SUCCESS(200, "操作成功", true),

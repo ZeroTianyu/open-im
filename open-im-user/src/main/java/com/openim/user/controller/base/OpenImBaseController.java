@@ -2,8 +2,8 @@ package com.openim.user.controller.base;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.openim.user.model.OpenIMPageable;
-import com.openim.user.model.OpenIMResponse;
+import com.openim.common.model.OpenIMPageable;
+import com.openim.common.model.OpenIMResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;

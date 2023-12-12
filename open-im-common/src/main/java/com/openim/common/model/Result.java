@@ -1,4 +1,4 @@
-package com.openim.auth.model;
+package com.openim.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

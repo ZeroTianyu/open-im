@@ -1,4 +1,4 @@
-package com.openim.user.model;
+package com.openim.common.model;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

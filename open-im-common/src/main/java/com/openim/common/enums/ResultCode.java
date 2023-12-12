@@ -3,7 +3,7 @@
 // (powered by FernFlower decompiler)
 //
 
-package com.openim.user.enums;
+package com.openim.common.enums;
 
 import java.io.Serializable;
 

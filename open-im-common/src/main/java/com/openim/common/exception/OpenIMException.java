@@ -1,6 +1,7 @@
-package com.openim.auth.exception;
+package com.openim.common.exception;
 
-import com.openim.auth.enums.ResultCode;
+
+import com.openim.common.enums.ResultCode;
 
 import java.text.MessageFormat;
 

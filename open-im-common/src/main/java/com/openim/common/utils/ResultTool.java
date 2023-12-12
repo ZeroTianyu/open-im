@@ -1,10 +1,10 @@
-package com.openim.user.utils;
+package com.openim.common.utils;
 
 
-import com.openim.user.enums.ResultCode;
-import com.openim.user.enums.ResultMessage;
-import com.openim.user.exception.AbstractOpenIMException;
-import com.openim.user.model.OpenIMResponse;
+import com.openim.common.enums.ResultCode;
+import com.openim.common.enums.ResultMessage;
+import com.openim.common.exception.AbstractOpenIMException;
+import com.openim.common.model.OpenIMResponse;
 
 /**
  * @Description: 返回工具集

@@ -1,9 +1,9 @@
 
-package com.openim.user.model;
+package com.openim.common.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.openim.user.enums.ResultCode;
-import com.openim.user.enums.ResultMessage;
+import com.openim.common.enums.ResultCode;
+import com.openim.common.enums.ResultMessage;
 
 import java.text.MessageFormat;
 
