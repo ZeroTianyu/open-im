@@ -10,15 +10,15 @@ import lombok.Data;
 
 @Data
 @JsonSerialize
-@TableName("user_detail")
+@TableName("user_info")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserInfo extends BaseEntity {
 
     /**
      * 用户名、昵称
      */
-    @TableField("name")
-    private String name;
+    @TableField("nike_name")
+    private String nikeName;
     /**
      * 头像地址
      */

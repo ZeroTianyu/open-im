@@ -10,11 +10,15 @@ import com.openim.common.model.jwt.JwtPayload;
 import com.openim.common.utils.JwtPayLoadUtils;
 import com.openim.user.controller.base.OpenImBaseController;
 import com.openim.user.entity.Friend;
+import com.openim.user.entity.UserInfo;
 import com.openim.user.model.request.FriendAddRequest;
 import com.openim.user.service.IFriendService;
+import com.openim.user.service.IUserInfoService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/friend")
@@ -22,7 +26,8 @@ public class FriendController extends OpenImBaseController {
 
     @Resource
     private IFriendService iFriendService;
-
+    @Resource
+    private IUserInfoService iUserInfoService;
 
     /**
      * 添加好友
@@ -54,7 +59,15 @@ public class FriendController extends OpenImBaseController {
         LambdaQueryWrapper<Friend> wrapper = Wrappers.lambdaQuery(Friend.class);
         wrapper.eq(Friend::getUserId, jwtPayLoad.getUserId());
 
-        Page<Friend> page = iFriendService.page(Page.of(pageNo, pageSize), wrapper);
+        Page page = iFriendService.page(Page.of(pageNo, pageSize), wrapper);
+
+        List<Friend> friendList = page.getRecords();
+        List<Long> friendUserIdList = friendList.stream().map(Friend::getFriendId).toList();
+
+        LambdaQueryWrapper<UserInfo> queryWrapper = Wrappers.lambdaQuery(UserInfo.class);
+        queryWrapper.in(UserInfo::getId, friendUserIdList);
+        List<UserInfo> userInfoList = iUserInfoService.list(queryWrapper);
+        page.setRecords(userInfoList);
         return OpenIMResponse.SUCCESS(page);
     }
 

@@ -65,18 +65,26 @@ public class MybatisPlusConfig {
                     // 当前登录用户不为空，创建人为空，则当前登录用户为创建人
                     if (Objects.nonNull(jwtPayLoad) && Objects.isNull(baseEntity.getCreaterId())) {
                         baseEntity.setCreaterId(jwtPayLoad.getUserId());
+                    } else {
+                        baseEntity.setCreaterId(0L);
                     }
 
                     if (Objects.nonNull(jwtPayLoad) && Objects.isNull(baseEntity.getCreaterName())) {
                         baseEntity.setCreaterName(jwtPayLoad.getNikeName());
+                    } else {
+                        baseEntity.setCreaterName("SYSTEM");
                     }
 
                     // 当前登录用户不为空，更新人为空，则当前登录用户为更新人
                     if (Objects.nonNull(jwtPayLoad) && Objects.isNull(baseEntity.getUpdaterId())) {
                         baseEntity.setUpdaterId(jwtPayLoad.getUserId());
+                    } else {
+                        baseEntity.setUpdaterId(0L);
                     }
                     if (Objects.nonNull(jwtPayLoad) && Objects.isNull(baseEntity.getUpdaterName())) {
                         baseEntity.setUpdaterName(jwtPayLoad.getNikeName());
+                    } else {
+                        baseEntity.setUpdaterName("SYSTEM");
                     }
                 }
             }

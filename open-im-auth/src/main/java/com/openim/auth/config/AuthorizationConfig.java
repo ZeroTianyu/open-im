@@ -227,7 +227,6 @@ public class AuthorizationConfig {
         return new ImmutableJWKSet<>(jwkSet);
 
     }
-
     /**
      * 配置jwt解析器
      *
