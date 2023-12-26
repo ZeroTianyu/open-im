@@ -71,5 +71,5 @@ public class Oauth2ThirdAccount extends BaseEntity {
      * 头像地址
      */
     @TableField(exist = false)
-    private String avatarUrl;
+    private String avatar;
 }

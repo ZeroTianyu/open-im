@@ -78,7 +78,7 @@ public class Oauth2BasicUserServiceImpl extends ServiceImpl<Oauth2BasicUserMappe
     public Long saveByThirdAccount(Oauth2ThirdAccount thirdAccount) {
         Oauth2BasicUser basicUser = new Oauth2BasicUser();
         basicUser.setNikeName(thirdAccount.getName());
-        basicUser.setAvatarUrl(thirdAccount.getAvatarUrl());
+        basicUser.setAvatar(thirdAccount.getAvatar());
         basicUser.setDeleted(Boolean.FALSE);
         basicUser.setSourceFrom(thirdAccount.getType());
         this.save(basicUser);

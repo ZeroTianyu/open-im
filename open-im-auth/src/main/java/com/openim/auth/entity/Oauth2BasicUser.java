@@ -53,7 +53,7 @@ public class Oauth2BasicUser extends BaseEntity implements UserDetails {
     /**
      * 头像地址
      */
-    private String avatarUrl;
+    private String avatar;
     /**
      * 权限信息
      * 非数据库字段

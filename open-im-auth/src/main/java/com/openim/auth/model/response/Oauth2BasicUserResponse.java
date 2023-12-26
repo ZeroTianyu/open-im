@@ -20,5 +20,5 @@ public class Oauth2BasicUserResponse extends BaseEntity {
     /**
      * 头像地址
      */
-    private String avatarUrl;
+    private String avatar;
 }

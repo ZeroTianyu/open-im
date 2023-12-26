@@ -22,8 +22,8 @@ public class UserInfo extends BaseEntity {
     /**
      * 头像地址
      */
-    @TableField("avatar_url")
-    private String avatarUrl;
+    @TableField("avatar")
+    private String avatar;
 
 
 }

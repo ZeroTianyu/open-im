@@ -13,6 +13,6 @@ public class UserInfoResponse extends BaseEntity {
     /**
      * 头像地址
      */
-    private String avatarUrl;
+    private String avatar;
 
 }

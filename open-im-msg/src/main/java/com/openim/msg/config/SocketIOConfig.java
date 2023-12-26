@@ -3,6 +3,7 @@ package com.openim.msg.config;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
+import com.openim.msg.constant.UrlParamConstant;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.StringUtils;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -74,11 +76,11 @@ public class SocketIOConfig {
         config.setAuthorizationListener(data -> {
             log.info("AuthorizationListener: {}", data);
             // 从url中获取token信息
-//            String token = data.getSingleUrlParam(UrlParamConstant.TOKEN);
-//            if (!StringUtils.hasText(token)) {
-//                return false;
-//            }
-//            verifyToken(token);
+            String token = data.getSingleUrlParam(UrlParamConstant.TOKEN);
+            if (!StringUtils.hasText(token)) {
+                return false;
+            }
+            verifyToken(token);
             return true;
         });
 

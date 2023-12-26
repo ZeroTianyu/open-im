@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class NettySocketEventHandler {
+public class SocketEventHandler {
 
     @Value("${spring.cloud.stream.bindings.message-in-0.destination}")
     private String bindingName;
