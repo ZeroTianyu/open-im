@@ -11,10 +11,10 @@ public interface Session {
     /**
      * 绑定会话
      *
-     * @param username       会话绑定用户
+     * @param userId       会话绑定用户
      * @param socketIOClient 哪个 socketIOClient 要绑定会话
      */
-    void bind(String username, SocketIOClient socketIOClient);
+    void bind(Long userId, SocketIOClient socketIOClient);
 
     /**
      * 解绑会话
@@ -30,7 +30,7 @@ public interface Session {
      * @param socketIOClient 哪个 socketIOClient
      * @return 属性值
      */
-    Object getAttribute(String name, SocketIOClient socketIOClient);
+    Object getAttribute(Long name, SocketIOClient socketIOClient);
 
     /**
      * 设置属性
@@ -44,8 +44,8 @@ public interface Session {
     /**
      * 根据用户名获取 socketIOClient
      *
-     * @param username 用户名
+     * @param userId 用户id
      * @return SocketIOClient
      */
-    SocketIOClient getSocketIOClient(String username);
+    SocketIOClient getSocketIOClient(Long userId);
 }

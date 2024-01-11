@@ -55,7 +55,7 @@ public class SocketEventHandler {
             JSONObject payloads = JWTUtil.parseToken(token).getPayloads();
             JwtPayload payload = payloads.toBean(JwtPayload.class);
             // 绑定服务器
-            SessionFactory.getSession().bind(payload.getSub(), client);
+            SessionFactory.getSession().bind(payload.getUserId(), client);
             redisUtil.set("name", payload.getSub());
             log.info(payload.getSub() + "--------------------客户端连接成功---------------------");
         } else {

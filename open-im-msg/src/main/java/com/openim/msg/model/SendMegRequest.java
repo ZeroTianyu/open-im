@@ -11,7 +11,7 @@ public class SendMegRequest implements Serializable {
     /**
      * 接收者ID，sessionType1或者4时必填，如果是群聊则不填
      */
-    private String recvID;
+    private Long recvID;
     /**
      * 群ID，sessionType2或者3时必填，如果为单聊则不填
      */
@@ -59,9 +59,5 @@ public class SendMegRequest implements Serializable {
      * 消息发送时间，仅导入消息时填写，单位毫秒
      */
     private Long sendTime;
-    /**
-     * 离线推送的具体内容，如果不填写，使用服务器默认推送标题
-     */
-//    private MsgOfflinePushInfo offlinePushInfo;
 
 }

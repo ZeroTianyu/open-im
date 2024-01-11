@@ -8,24 +8,24 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class SessionMemoryImpl implements Session {
 
-    private static  Map<String, SocketIOClient> usernameClientMap = new ConcurrentHashMap<>();
-    private static  Map<SocketIOClient, String> clientUsernameMap = new ConcurrentHashMap<>();
+    private static Map<Long, SocketIOClient> userIdClientMap = new ConcurrentHashMap<>();
+    private static Map<SocketIOClient, Long> clientUserIdMap = new ConcurrentHashMap<>();
 
     @Override
-    public void bind(String username, SocketIOClient socketIOClient) {
-        usernameClientMap.put(username, socketIOClient);
-        clientUsernameMap.put(socketIOClient, username);
+    public void bind(Long userId, SocketIOClient socketIOClient) {
+        userIdClientMap.put(userId, socketIOClient);
+        clientUserIdMap.put(socketIOClient, userId);
     }
 
     @Override
     public void unbind(SocketIOClient socketIOClient) {
-        String username = clientUsernameMap.get(socketIOClient);
-        usernameClientMap.remove(username);
-        clientUsernameMap.remove(socketIOClient);
+        Long userId = clientUserIdMap.get(socketIOClient);
+        userIdClientMap.remove(userId);
+        clientUserIdMap.remove(socketIOClient);
     }
 
     @Override
-    public Object getAttribute(String username, SocketIOClient socketIOClient) {
+    public Object getAttribute(Long userId, SocketIOClient socketIOClient) {
         return null;
     }
 
@@ -35,12 +35,12 @@ public class SessionMemoryImpl implements Session {
     }
 
     @Override
-    public SocketIOClient getSocketIOClient(String username) {
-        return usernameClientMap.get(username);
+    public SocketIOClient getSocketIOClient(Long userId) {
+        return userIdClientMap.get(userId);
     }
 
     @Override
     public String toString() {
-        return usernameClientMap.toString();
+        return userIdClientMap.toString();
     }
 }

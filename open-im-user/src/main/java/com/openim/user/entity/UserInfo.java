@@ -19,6 +19,13 @@ public class UserInfo extends BaseEntity {
      */
     @TableField("nike_name")
     private String nikeName;
+
+
+    /**
+     * oauth用户id
+     */
+    @TableField("oauth_user_id")
+    private String oauthUserId;
     /**
      * 头像地址
      */

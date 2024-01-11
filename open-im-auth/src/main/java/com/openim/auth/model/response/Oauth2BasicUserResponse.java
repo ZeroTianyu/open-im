@@ -10,7 +10,7 @@ public class Oauth2BasicUserResponse extends BaseEntity {
     /**
      * 用户名、昵称
      */
-    private String name;
+    private String nikeName;
 
     /**
      * 账号

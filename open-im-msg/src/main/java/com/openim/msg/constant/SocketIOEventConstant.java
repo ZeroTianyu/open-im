@@ -6,6 +6,6 @@ package com.openim.msg.constant;
  */
 
 public class SocketIOEventConstant {
-    public static final String CHAT = "chat";
+    public static final String CHAT = "CHAT";
 
 }
